@@ -1,16 +1,15 @@
 
-async function getUserAsync() 
-{
-  const res = await fetch('https://jsonplaceholder.typicode.com/comments');
-  const data = await res.json()
-  return data;
- }
-
-  getUserAsync()
-  .then(data =>
-    { let con = '';
+fetch('https://jsonplaceholder.typicode.com/comments', {
+    method: 'GET',
+    headers: {
+        'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+}})
+.then((res) => res.json())
+.then((data) => {
+    let con = '';
     var br=0;
-  data.forEach(function(post) {
+ data.forEach(function(post) {
   br++
   if (br < 10) {
     con += 
@@ -19,9 +18,8 @@ async function getUserAsync()
    <h3>E-mail: ${post.email}</h3>
    <p>Comment: ${post.body}</p>
    </div>`; 
-   document.getElementById("uvod").innerHTML = con;
-          } }
-        )
-        });
+    } }
+ )
 
-getUserAsync();
+document.getElementById("uvod").innerHTML = con;
+})
